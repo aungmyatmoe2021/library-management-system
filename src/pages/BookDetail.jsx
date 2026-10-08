@@ -7,6 +7,7 @@ export default function BookDetail() {
   let { id } = useParams();
   let { BASE_URL } = urls();
   let { data: book, loading, error } = useFetch(`${BASE_URL}/${id}`);
+  console.log(`${BASE_URL}/${id}`);
 
   return (
     <>
