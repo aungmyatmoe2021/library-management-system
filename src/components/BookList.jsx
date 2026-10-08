@@ -1,10 +1,11 @@
 import React from "react";
 import bookImage from "./../assets/book.png";
 import useFetch from "../hooks/useFetch";
-import url from "./../url";
+import urls from "./../url";
+import { Link } from "react-router-dom";
 
 export default function BookList() {
-  let { BASE_URL } = url();
+  let { BASE_URL } = urls();
   let { data: books, loading, error } = useFetch(BASE_URL);
   if (error) {
     return <p>{error}</p>;
@@ -16,9 +17,9 @@ export default function BookList() {
       {!!books && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 my-3">
           {books.map((book) => (
-            <div key={book.id} className="p-4 border">
+            <Link to={`/books/${book.id}`} key={book.id} className="p-4 border">
               <img src={bookImage} alt="book" />
-              <di className="text-center space-y-2 mt-3">
+              <div className="text-center space-y-2 mt-3">
                 <h1>{book.title}</h1>
                 <p>{book.description}</p>
                 {/* genres */}
@@ -29,8 +30,8 @@ export default function BookList() {
                     </span>
                   ))}
                 </div>
-              </di>
-            </div>
+              </div>
+            </Link>
           ))}
         </div>
       )}
